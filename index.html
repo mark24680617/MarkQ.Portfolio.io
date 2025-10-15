@@ -2,23 +2,89 @@
 <html lang="en">
 
 <!--
-WRITTEN BY: Your name here
-EMAIL: Your email here
+WRITTEN BY: Tiancheng Qiu
+EMAIL: tiancq2@uci.edu
 -->
 
 <head>
   <meta charset="utf-8">
-  <meta name="author" content="Your name here">
-  <meta name="description" content="description of your page">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Mark Qiu>">
+  <meta name="description" content="Portfolio of Mark Qiu">
    <!-- you would link to an external stylesheet here! -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
    <!-- you would also link to Bootstrap here! -->
-  <title>title here</title>
+  <title>Mark Qiu's Portfolio </title>
 </head>
 <body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" role="banner">
+    <div class="container navbar">
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="projects.html" aria-current="false">Projects</a></li>
+          <li><a href="about.html" aria-current="false">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  
+    <section class= "banner" role = "img" aria-label="banner">
+      <div class="container">
+        <h1 id = "main">Hello World 🙋 </h1>
+        <p class="muted">My name is Mark Qiu. This is a simple Portfolio introducing my experiences. Hope you enjoy it. </p>
+      </div>
+    </section>
+
+    <main id="main" class="main-content" role="main">
+    <section class="intro2">
+      <div class="container">
+        <h2>Welcome to My Portfolio!</h2>
+        <p>I'm currently a student in UCI from Information and Computer Science School. I am willing to contribute my passion in either front-end, back-end development. Scroll Down to learn more about me!</p>
+      </div>
+    </section>
+
+    <section class="Education">
+      <div class="container">
+        <h2>Education</h2>
+        <div class="edu-list">
+          <article class="edu-item">
+            <img src="pictures/UCI_logo.svg" alt="UCI Logo">
+            <h3>Univeristy of California, Irvine</h3>
+            <p>B.S. Informatics 2025.</p>
+            <p>Relevant Coursework: Project Management, Information Retrieval, Project in Software System Design, Data Structure, Assembly language, User Interation Software.</p>
+            <a href="https://ics.uci.edu/" class="external link">Learn More</a>
+            <p>&nbsp</p>
+          </article>
+
+          <article class="edu-item">
+            <img src="pictures/WCHS.png" alt="WCHS logo">
+            <h3>Whittier Chrisitian High School</h3>
+            <p>Earned Bronze Medal in Economics at the Orange County Academic Decathlon. Elected to Student Council after delivering a campaign speech to the entire school.</p>
+            
+            <a href="https://www.wchs.com/" class="external link">Learn More</a>
+          </article>
+          
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>&copy; 2025 Mark Qiu. All rights reserved.</p>
   <p>
     <a href="http://validator.w3.org/check?uri=referer">
-       W3C validator
+       Verified by W3C validator
     </a>
   </p>
+    </div>
+  </footer>
 </body>
 </html>

@@ -1,4 +1,4 @@
---Readme document for *YOUR NAME*, *YOUR_EMAIL@uci.edu*--
+--Readme document for Tiancheng Qiu, tiancq@uci.edu--
 
 A reminder on academic integrity, as described in the syllabus.
 

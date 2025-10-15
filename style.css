@@ -1,0 +1,90 @@
+:root {
+  --bg: #0b1020;
+  --panel: #0f172a;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --brand: #22c55e;
+  --link: #60a5fa;
+  --maxw: 1100px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background: radial-gradient(1200px 500px at 20% -10%, #0b2340 0%, transparent 60%) , var(--bg);
+  line-height: 1.6;
+}
+
+a { color: var(--link); }
+a:hover { text-decoration: underline; }
+
+/* Skip link for accessibility */
+.skip-link {
+  position: absolute; left: -9999px; top: auto;
+}
+.skip-link:focus {
+  left: 1rem; top: 1rem; background: #111827; color: white; padding: .5rem .75rem; border-radius: .5rem;
+}
+
+/* Layout */
+.container { max-width: var(--maxw); margin: 0 auto; padding: 1rem; }
+header.site-header {
+  position: sticky; top: 0; z-index: 10;
+  backdrop-filter: saturate(140%) blur(8px);
+  background: rgba(2, 6, 23, 0.72);
+  border-bottom: 1px solid #1f2937;
+}
+/* Nav bar */
+.navbar { display: flex; align-items: center; justify-content: center; gap: 1rem; padding: .75rem 0; min-height: 64px; }
+.brand { display: flex; align-items: center; gap: .75rem; text-decoration: none; color: var(--text); font-weight: 700; }
+nav { display: block; }
+nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 1rem; justify-content: center; }
+nav a { text-decoration: none; color: var(--text); padding: .75rem .9rem; border-radius: .5rem; }
+nav a:focus, nav a[aria-current="page"] { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+/* intro banner */
+.banner {
+  background: url("pictures/page.jpeg") center/cover no-repeat;
+  border-bottom: 1px solid #1f2937;
+}
+.banner .container { padding: 50rem 1rem 3rem; }
+
+/* Sections */
+.section { padding: 2rem 0; }
+.section h2 { margin-top: 0; font-size: clamp(1.4rem, 1vw + 1rem, 2rem); }
+.card {
+  grid-column: span 12;
+  background: var(--panel);
+  border: 1px solid #1f2937;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+/* Skills table (accessible) */
+table.skills { width: 100%; border-collapse: collapse; }
+.skills caption { text-align: left; color: var(--muted); margin-bottom: .5rem; }
+.skills th, .skills td { border: 1px solid #1f2937; padding: .5rem .75rem; }
+.skills th { background: #0b2340; text-align: left; }
+
+/* Footer */
+footer { border-top: 1px solid #1f2937; color: var(--muted); }
+footer .container { padding-top: 1rem; padding-bottom: 2rem; }
+
+/* Forms */
+/* Form styles removed (no forms in this repo). Add back if needed. */
+
+/* Responsive: 768px+ */
+@media (min-width: 768px) {
+  .card { grid-column: span 6; }
+}
+
+/* Responsive: 1024px+ */
+@media (min-width: 1024px) {
+  .card { grid-column: span 4; }
+}
+
+/* Utility */
+.muted { color: var(--muted); }
