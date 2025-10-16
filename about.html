@@ -3,7 +3,7 @@
 <head>
 
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Mark Qiu">
   <meta name="description" content="Portfolio of Mark Qiu">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,10 +17,8 @@
 <body>
 
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header" role="banner">
+  <header class="site-header">
     <div class="container navbar">
-      <a href="index.html" class="brand">
-      </a>
       <nav aria-label="Primary">
         <ul>
           <li><a href="index.html" aria-current="false">Home</a></li>
@@ -34,40 +32,41 @@
 <main id="main" class="container section">
   <section aria-label="Skill table">
   <h2>Skills</h2>
-  <table class="skills" aria-describedby="skills-desc">
+  <table class="skills">
     <thead>
       <tr>
-        <th scope="col">Category</th>
-        <th scope="col">Items</th>
-        <th scope="col">Levels</th>
+        <th id="th-category" scope="col">Category</th>
+        <th id="th-items" scope="col">Items</th>
+        <th id="th-levels" scope="col">Levels</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th scope="row">Languages</th>
-        <td>C++, Golang, JAVA, Python, Typescript, HTML, CSS</td>
-        <td>Intermediate</td>
+        <th id="row-languages" scope="row">Languages</th>
+        <td headers="th-items row-languages">C++, Golang, JAVA, Python, Typescript, HTML, CSS</td>
+        <td headers="th-levels row-languages">Intermediate</td>
       </tr>
       <tr>
-        <th scope="row">Database</th>
-        <td>MySQL, Redis</td>
-        <td>Intermediate</td>
+        <th id="row-database" scope="row">Database</th>
+        <td headers="th-items row-database">MySQL, Redis</td>
+        <td headers="th-levels row-database">Intermediate</td>
       </tr>
       <tr>
-        <th scope="row">Tools</th>
-        <td>Jetbrain IDEs, Vscode, Git, Doxygen, UML, Docker, Jira, AI tools</td>
-        <td>Proficient</td>
+        <th id="row-tools" scope="row">Tools</th>
+        <td headers="th-items row-tools">Jetbrain IDEs, Vscode, Git, Doxygen, UML, Docker, Jira, AI tools</td>
+        <td headers="th-levels row-tools">Proficient</td>
       </tr>
       <tr>
-        <th scope="row">OS andFramework</th>
-        <td>QT, Linux</td>
-        <td>Intermediate</td>
+        <th id="row-os" scope="row">OS andFramework</th>
+        <td headers="th-items row-os">QT, Linux</td>
+        <td headers="th-levels row-os">Intermediate</td>
       </tr>
     </tbody>
   </table>
+  </section>
 
+  <section class="contact">
    <h2>Contact Info</h2>
-    <section class="contact">
      <ul>
         <li>Email: mark24680617@gmail.com</li>
         <li>Phone: (626) 362-9087</li>
@@ -77,7 +76,7 @@
   </section>
 </main>
 
-  <footer class="site-footer" role="contentinfo">
+  <footer class="site-footer">
     <div class="container">
       <p>&copy; 2025 Mark Qiu. All rights reserved.</p>
 
