@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Mark Qiu">
+  <meta name="description" content="Photography Gallery - Mark Qiu's Travel and Personal Photos">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <title>Photo Gallery - Mark Qiu</title>
+</head>
+<body>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" alt="Full size image">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+    <button class="lightbox-prev" id="lightbox-prev">&#10094;</button>
+    <button class="lightbox-next" id="lightbox-next">&#10095;</button>
+  </div>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container navbar">
+      <div class="logo">Mark Qiu</div>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="gallery.html" aria-current="page">Gallery</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="main-content">
+    <div class="container">
+      <div class="page-header">
+        <h1>Photography Gallery</h1>
+        <p class="page-subtitle">Moments captured through my lens from around the world</p>
+      </div>
+
+      <!-- Personal Photos Section -->
+      <section class="gallery-section">
+        <div class="gallery-header">
+          <h2>Personal</h2>
+          <p class="gallery-description">Portraits and personal moments</p>
+        </div>
+        <div class="photo-grid">
+          <div class="photo-item fade-in-up">
+            <img src="pictures/personal_1.jpeg" alt="Personal photo 1" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/personal_2.jpeg" alt="Personal photo 2" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/personal_3.jpeg" alt="Personal photo 3" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/personal_4.jpeg" alt="Personal photo 4" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/personal_5.jpeg" alt="Personal photo 5" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/personal_6.jpeg" alt="Personal photo 6" loading="lazy" class="gallery-image">
+          </div>
+        </div>
+      </section>
+
+      <!-- California Section -->
+      <section class="gallery-section">
+        <div class="gallery-header">
+          <h2>California Coastline</h2>
+          <p class="gallery-description">The Golden State - diverse landscapes and coastal beauty</p>
+        </div>
+        <div class="photo-grid">
+          <div class="photo-item fade-in-up">
+            <img src="pictures/California_1.jpeg" alt="California landscape 1" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/California_2.jpeg" alt="California landscape 2" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/California_3.jpeg" alt="California landscape 3" loading="lazy" class="gallery-image">
+          </div>
+        </div>
+      </section>
+
+      <!-- Yosemite Section -->
+      <section class="gallery-section">
+        <div class="gallery-header">
+          <h2>Yosemite National Park</h2>
+          <p class="gallery-description">Majestic granite cliffs and pristine wilderness</p>
+        </div>
+        <div class="photo-grid">
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Yosemite_1.jpeg" alt="Yosemite National Park 1" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Yosemite_2.jpeg" alt="Yosemite National Park 2" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item photo-item-wide fade-in-up">
+            <img src="pictures/sequio.jpeg" alt="Sequoia trees" loading="lazy" class="gallery-image">
+          </div>
+        </div>
+      </section>
+
+      <!-- Joshua Tree Section -->
+      <section class="gallery-section">
+        <div class="gallery-header">
+          <h2>Joshua Tree</h2>
+          <p class="gallery-description">Desert landscapes and unique rock formations</p>
+        </div>
+        <div class="photo-grid">
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Joshua_1.jpeg" alt="Joshua Tree 1" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Joshua_2.jpeg" alt="Joshua Tree 2" loading="lazy" class="gallery-image">
+          </div>
+        </div>
+      </section>
+
+      <!-- Cancun Section -->
+      <section class="gallery-section">
+        <div class="gallery-header">
+          <h2>Cancun, Mexico</h2>
+          <p class="gallery-description">Turquoise waters and tropical paradise</p>
+        </div>
+        <div class="photo-grid">
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Cancun_1.jpeg" alt="Cancun beach 1" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Cancun_2.jpeg" alt="Cancun beach 2" loading="lazy" class="gallery-image">
+          </div>
+        </div>
+      </section>
+
+      <!-- Osaka Section -->
+      <section class="gallery-section">
+        <div class="gallery-header">
+          <h2>Osaka, Japan</h2>
+          <p class="gallery-description">Modern city meets traditional Japanese culture</p>
+        </div>
+        <div class="photo-grid">
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Osaka_1.jpeg" alt="Osaka cityscape 1" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Osaka_2.jpeg" alt="Osaka cityscape 2" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Osaka_3.jpeg" alt="Osaka cityscape 3" loading="lazy" class="gallery-image">
+          </div>
+        </div>
+      </section>
+
+      <!-- Daochen Section -->
+      <section class="gallery-section">
+        <div class="gallery-header">
+          <h2>Daocheng, China</h2>
+          <p class="gallery-description">High-altitude landscapes and stunning mountain scenery</p>
+        </div>
+        <div class="photo-grid">
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Daochen_1.jpeg" alt="Daocheng landscape 1" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Daochen_2.jpeg" alt="Daocheng landscape 2" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Daochen_3.jpeg" alt="Daocheng landscape 3" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Daochen_4.jpeg" alt="Daocheng landscape 4" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Daochen_5.jpeg" alt="Daocheng landscape 5" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Daochen_6.jpeg" alt="Daocheng landscape 6" loading="lazy" class="gallery-image">
+          </div>
+        </div>
+      </section>
+
+      <!-- Dali Section -->
+      <section class="gallery-section">
+        <div class="gallery-header">
+          <h2>Dali, China</h2>
+          <p class="gallery-description">Ancient city surrounded by mountains and Erhai Lake</p>
+        </div>
+        <div class="photo-grid">
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Dali_1.jpeg" alt="Dali landscape 1" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Dali_2.jpeg" alt="Dali landscape 2" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Dali_3.jpeg" alt="Dali landscape 3" loading="lazy" class="gallery-image">
+          </div>
+        </div>
+      </section>
+
+      <!-- Lijiang Section -->
+      <section class="gallery-section">
+        <div class="gallery-header">
+          <h2>Lijiang, China</h2>
+          <p class="gallery-description">UNESCO World Heritage ancient town with cobblestone streets</p>
+        </div>
+        <div class="photo-grid">
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Lijiang_1.jpeg" alt="Lijiang old town 1" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Lijiang_2.jpeg" alt="Lijiang old town 2" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/Lijiang_3.jpeg" alt="Lijiang old town 3" loading="lazy" class="gallery-image">
+          </div>
+        </div>
+      </section>
+
+      <!-- Dunhuang Section -->
+      <section class="gallery-section">
+        <div class="gallery-header">
+          <h2>Dunhuang, China</h2>
+          <p class="gallery-description">Silk Road oasis with singing sand dunes and ancient caves</p>
+        </div>
+        <div class="photo-grid">
+          <div class="photo-item fade-in-up">
+            <img src="pictures/dunhuang_1.jpeg" alt="Dunhuang sand dunes 1" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/dunhuang_2.jpeg" alt="Dunhuang sand dunes 2" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/dunhuang_3.jpeg" alt="Dunhuang sand dunes 3" loading="lazy" class="gallery-image">
+          </div>
+        </div>
+      </section>
+
+      <!-- Danxia Section -->
+      <section class="gallery-section">
+        <div class="gallery-header">
+          <h2>Zhangye Danxia, China</h2>
+          <p class="gallery-description">Rainbow mountains with stunning colorful rock formations</p>
+        </div>
+        <div class="photo-grid">
+          <div class="photo-item fade-in-up">
+            <img src="pictures/danxia_1.jpeg" alt="Danxia rainbow mountains 1" loading="lazy" class="gallery-image">
+          </div>
+          <div class="photo-item fade-in-up">
+            <img src="pictures/danxia_2.jpeg" alt="Danxia rainbow mountains 2" loading="lazy" class="gallery-image">
+          </div>
+        </div>
+      </section>
+
+      <!-- Special Moments Section -->
+      <section class="gallery-section">
+        <div class="gallery-header">
+          <h2>Special Moments</h2>
+          <p class="gallery-description">Unique captures and celestial wonders</p>
+        </div>
+        <div class="photo-grid">
+          <div class="photo-item photo-item-wide fade-in-up">
+            <img src="pictures/Comet.jpeg" alt="Comet in the night sky" loading="lazy" class="gallery-image">
+            <div class="photo-caption">Capturing celestial moments</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery Stats -->
+      <section class="gallery-stats">
+        <div class="stat-card">
+          <div class="stat-number">20+</div>
+          <div class="stat-label">Destinations</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100+</div>
+          <div class="stat-label">Photos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Countries</div>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <div class="gallery-cta">
+        <h2>Let's Connect</h2>
+        <p>Interested in collaborating or just want to chat about photography?</p>
+        <a href="about.html" class="btn btn-primary">Get in Touch</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h3>Mark Qiu</h3>
+        <p>Full Stack Developer passionate about building efficient, well-managed projects.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <ul class="footer-links">
+          <li><a href="https://github.com/mark24680617" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/tiancheng-q-4a1901237/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="mailto:mark24680617@gmail.com">Email</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <p class="footer-copyright">&copy; 2025 Mark Qiu. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ============================================
+    // Lightbox Functionality
+    // ============================================
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const closeBtn = document.querySelector('.lightbox-close');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+    
+    // Get all gallery images
+    const galleryImages = document.querySelectorAll('.gallery-image');
+    let currentImageIndex = 0;
+    
+    // Open lightbox
+    galleryImages.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        currentImageIndex = index;
+        openLightbox(img);
+      });
+      
+      // Add keyboard support for images
+      img.setAttribute('tabindex', '0');
+      img.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          currentImageIndex = index;
+          openLightbox(img);
+        }
+      });
+    });
+    
+    function openLightbox(img) {
+      lightbox.style.display = 'flex';
+      lightboxImg.src = img.src;
+      lightboxCaption.textContent = img.alt;
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+    
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+      document.body.style.overflow = ''; // Restore scrolling
+    }
+    
+    // Close lightbox on close button click
+    closeBtn.addEventListener('click', closeLightbox);
+    
+    // Close lightbox when clicking outside the image
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+    
+    // Close lightbox on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+        closeLightbox();
+      }
+    });
+    
+    // Navigate to previous image
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+      openLightbox(galleryImages[currentImageIndex]);
+    });
+    
+    // Navigate to next image
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+      openLightbox(galleryImages[currentImageIndex]);
+    });
+    
+    // Keyboard navigation (left/right arrows)
+    document.addEventListener('keydown', (e) => {
+      if (lightbox.style.display === 'flex') {
+        if (e.key === 'ArrowLeft') {
+          prevBtn.click();
+        } else if (e.key === 'ArrowRight') {
+          nextBtn.click();
+        }
+      }
+    });
+    
+    // ============================================
+    // Scroll Animations
+    // ============================================
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Add staggered delay for nicer effect
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 50); // 50ms stagger
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    // Observe all fade-in elements
+    const fadeElements = document.querySelectorAll('.fade-in-up');
+    fadeElements.forEach(element => observer.observe(element));
+    
+    // Also observe gallery sections for header animations
+    const gallerySections = document.querySelectorAll('.gallery-section');
+    gallerySections.forEach(section => {
+      const header = section.querySelector('.gallery-header');
+      if (header) {
+        header.classList.add('fade-in-up');
+        observer.observe(header);
+      }
+    });
+  </script>
+</body>
+</html>
+

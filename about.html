@@ -1,90 +1,207 @@
 <!doctype html>
 <html lang="en">
 <head>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Mark Qiu">
-  <meta name="description" content="Portfolio of Mark Qiu">
+  <meta name="description" content="About Mark Qiu - Developer, Photographer, and Music Enthusiast">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
-  <title>Mark Qiu — Portfolio</title>
-
+  <title>About - Mark Qiu</title>
 </head>
 <body>
 
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="container navbar">
+      <div class="logo">Mark Qiu</div>
       <nav aria-label="Primary">
         <ul>
-          <li><a href="index.html" aria-current="false">Home</a></li>
-          <li><a href="projects.html" aria-current="false">Projects</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
           <li><a href="about.html" aria-current="page">About</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-<main id="main" class="container section">
-  <section aria-label="Skill table">
-  <h2>Skills</h2>
-  <table class="skills">
-    <thead>
-      <tr>
-        <th id="th-category" scope="col">Category</th>
-        <th id="th-items" scope="col">Items</th>
-        <th id="th-levels" scope="col">Levels</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th id="row-languages" scope="row">Languages</th>
-        <td headers="th-items row-languages">C++, Golang, JAVA, Python, Typescript, HTML, CSS</td>
-        <td headers="th-levels row-languages">Intermediate</td>
-      </tr>
-      <tr>
-        <th id="row-database" scope="row">Database</th>
-        <td headers="th-items row-database">MySQL, Redis</td>
-        <td headers="th-levels row-database">Intermediate</td>
-      </tr>
-      <tr>
-        <th id="row-tools" scope="row">Tools</th>
-        <td headers="th-items row-tools">Jetbrain IDEs, Vscode, Git, Doxygen, UML, Docker, Jira, AI tools</td>
-        <td headers="th-levels row-tools">Proficient</td>
-      </tr>
-      <tr>
-        <th id="row-os" scope="row">OS andFramework</th>
-        <td headers="th-items row-os">QT, Linux</td>
-        <td headers="th-levels row-os">Intermediate</td>
-      </tr>
-    </tbody>
-  </table>
-  </section>
+  <main id="main" class="main-content">
+    <div class="container">
+      <div class="page-header">
+        <h1>About Me</h1>
+        <p class="page-subtitle">Illuminate Night, Follow Journey</p>
+      </div>
 
-  <section class="contact">
-   <h2>Contact Info</h2>
-     <ul>
-        <li>Email: mark24680617@gmail.com</li>
-        <li>Phone: (626) 362-9087</li>
-        <li><a href="https://www.linkedin.com/in/tiancheng-q-4a1901237/" class="external link">Linkedin Link</a></li>
-        <li><a href="https://github.com/mark24680617" class = "external link">Github Link</a></li>
-        </ul>
-  </section>
-</main>
+      <section class="about-intro">
+        <p class="intro-text">
+          I'm Mark Qiu, a recent Computer Science graduate from UC Irvine who believes that the best 
+          portfolios show both what you can build and who you are. While I'm passionate about backend 
+          development and system optimization, I'm equally enthusiastic about photography, exploring 
+          new places, and making music.
+        </p>
+      </section>
+
+      <section class="skills-section">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-modern">
+          <div class="skill-category">
+            <h3>Languages</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">C++</span>
+              <span class="skill-tag">Java</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Golang</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">JavaScript</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3>Database</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">MySQL</span>
+              <span class="skill-tag">Redis</span>
+              <span class="skill-tag">Hive</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3>Tools & Technologies</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Jira</span>
+              <span class="skill-tag">VS Code</span>
+              <span class="skill-tag">JetBrains IDEs</span>
+              <span class="skill-tag">AI Tools</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3>Frameworks & OS</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Qt</span>
+              <span class="skill-tag">Kratos</span>
+              <span class="skill-tag">Linux</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="interests-section">
+        <h2 class="section-title">Life Beyond Code</h2>
+        <p class="section-intro">
+          A portfolio is more than just a resume—it's a window into who you are. 
+          Here's what drives me outside of software development.
+        </p>
+
+        <div class="hobbies-grid">
+          <article class="hobby-card">
+            <div class="hobby-icon-large">📸</div>
+            <h3>Photography</h3>
+            <p>
+              I love capturing moments and telling visual stories. Whether it's landscape photography 
+              during my travels or street photography around the city, I'm always looking for that 
+              perfect shot. Photography teaches me to pay attention to details—a skill that translates 
+              well into debugging code!
+            </p>
+            <div class="hobby-note">
+              <em>Check out my <a href="gallery.html" style="color: var(--link); text-decoration: underline;">photo gallery</a> featuring 40+ photos from 10+ destinations across the US, Mexico, Japan, and China!</em>
+            </div>
+          </article>
+
+          <article class="hobby-card">
+            <div class="hobby-icon-large">✈️</div>
+            <h3>Travel & Exploration</h3>
+            <p>
+              Exploring new places helps me gain fresh perspectives and understand different cultures. 
+              From the bustling streets of Shanghai during my internship to scenic California coastlines, 
+              each journey enriches my worldview and inspires creativity in my work.
+            </p>
+            <div class="hobby-highlights">
+              <strong>Recent Adventures:</strong>
+              <ul>
+                <li>One month backpacking in West China</li>
+                <li>California Coast Road Trips</li>
+                <li>Japan and South Korea</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="hobby-card">
+            <div class="hobby-icon-large">🎸</div>
+            <h3>Playing Guitar</h3>
+            <p>
+              Music is my creative outlet. Playing guitar helps me unwind after long coding sessions 
+              and keeps my creativity flowing. Whether it's learning new songs or jamming with friends, 
+              music reminds me that life is about balance between logic and art.
+            </p>
+            <div class="hobby-note">
+              <em>Currently learning: Fingerstyle arrangements and jazz chord progressions</em>
+            </div>
+          </article>
+        </div>
+
+        <div class="interests-cta">
+          <p class="interests-message">
+            Want to chat about photography techniques, travel recommendations, or guitar gear? 
+            Or maybe you have an exciting project opportunity? I'd love to connect!
+          </p>
+        </div>
+      </section>
+
+      <section class="contact-section">
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="contact-grid">
+          <div class="contact-card">
+            <div class="contact-icon">📧</div>
+            <h3>Email</h3>
+            <a href="mailto:mark24680617@gmail.com">mark24680617@gmail.com</a>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon">💼</div>
+            <h3>LinkedIn</h3>
+            <a href="https://www.linkedin.com/in/tiancheng-q-4a1901237/" target="_blank" rel="noopener">Connect with me</a>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon">💻</div>
+            <h3>GitHub</h3>
+            <a href="https://github.com/mark24680617" target="_blank" rel="noopener">@mark24680617</a>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon">🇺🇸</div>
+            <h3>Location</h3>
+            <p>California</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2025 Mark Qiu. All rights reserved.</p>
-
-  <p>
-    <a href="http://validator.w3.org/check?uri=referer">
-       Verified by W3C validator
-    </a>
-  </p>
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h3>Mark Qiu</h3>
+        <p>Full Stack Developer passionate about building efficient, well-managed projects.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <ul class="footer-links">
+          <li><a href="https://github.com/mark24680617" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/tiancheng-q-4a1901237/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="mailto:mark24680617@gmail.com">Email</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <p class="footer-copyright">&copy; 2025 Mark Qiu. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 </body>

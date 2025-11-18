@@ -1,89 +1,189 @@
 <!doctype html>
 <html lang="en">
 
-<!--
-WRITTEN BY: Tiancheng Qiu
-EMAIL: tiancq2@uci.edu
--->
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="Mark Qiu>">
-  <meta name="description" content="Portfolio of Mark Qiu">
-   <!-- you would link to an external stylesheet here! -->
+  <meta name="author" content="Mark Qiu">
+  <meta name="description" content="Portfolio of Mark Qiu - Backend Developer, Photographer, and Guitar Enthusiast">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
-   <!-- you would also link to Bootstrap here! -->
-  <title>Mark Qiu's Portfolio </title>
+  <title>Mark Qiu - Developer & Creative</title>
 </head>
 <body>
 
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header">
     <div class="container navbar">
+      <div class="logo">Mark Qiu</div>
       <nav aria-label="Primary">
         <ul>
           <li><a href="index.html" aria-current="page">Home</a></li>
-          <li><a href="projects.html" aria-current="false">Projects</a></li>
-          <li><a href="about.html" aria-current="false">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="about.html">About</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   
-    <section class= "banner" aria-label="banner">
-      <div class="container">
-        <h1 id = "title">Hello World 🙋 </h1>
-        <h3 class="gray">My name is Mark Qiu. This is a simple Portfolio introducing my experiences. Hope you enjoy it!</h3>
+  <section class="hero-cover" aria-label="Introduction">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content-cover">
+      <div class="hero-text-center">
+        <h1 class="hero-title-large">Hi, I'm Mark Qiu</h1>
+        <p class="hero-subtitle-large">Backend Developer | Photographer | Guitar Player</p>
+        <p class="hero-description-large">
+          I'm a recent graduate from UC Irvine with a passion for building scalable systems 
+          and capturing moments through my lens. When I'm not coding, you'll find me exploring 
+          new places or jamming on my guitar.
+        </p>
+        <div class="hero-buttons">
+          <a href="projects.html" class="btn btn-primary">View My Work</a>
+          <a href="gallery.html" class="btn btn-secondary">Photo Gallery</a>
+          <a href="about.html" class="btn btn-secondary">Get in Touch</a>
+        </div>
       </div>
-    </section>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll Down</span>
+      <div class="scroll-arrow">↓</div>
+    </div>
+  </section>
 
-    <main id="main" class="main-content">
-    <section class="intro2">
+  <main id="main" class="main-content">
+    
+    <section class="experience-section">
       <div class="container">
-        <h2>Welcome to My Portfolio!</h2>
-        <p>I'm currently a student in UCI from Information and Computer Science School. I am willing to contribute my passion in either front-end, back-end development. Scroll Down to learn more about me!</p>
-      </div>
-    </section>
-
-    <section class="Education">
-      <div class="container">
-        <h2>Education</h2>
-        <div class="edu-list">
-          <article class="edu-item">
-            <img src="pictures/UCI_logo.svg" alt="UCI Logo">
-            <h3>Univeristy of California, Irvine</h3>
-            <p>B.S. Informatics 2025.</p>
-            <p>Relevant Coursework: Project Management, Information Retrieval, Project in Software System Design, Data Structure, Assembly language, User Interation Software.</p>
-            <a href="https://ics.uci.edu/" class="external link">Learn More</a>
-            <p>&nbsp;</p>
+        <h2 class="section-title">Professional Experience</h2>
+        
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3>Backend Developer Intern</h3>
+                <span class="timeline-meta">Bilibili • Shanghai, China • June 2024 - August 2024</span>
+              </div>
+              <ul class="timeline-list">
+                <li>Developed an internal data website for the Operations Team, displaying data from MySQL using Hive</li>
+                <li>Improved database efficiency by implementing Taishan caching, reducing slow-running queries by 80%</li>
+                <li>Integrated local development environment with GitLab, TAPD, and Goland using the Kratos framework</li>
+                <li>Deployed backend services to UAT and pre-environments, ensuring data consistency</li>
+              </ul>
+            </div>
           </article>
 
-          <article class="edu-item">
-            <img src="pictures/WCHS.png" alt="WCHS logo">
-            <h3>Whittier Chrisitian High School</h3>
-            <p>Earned Bronze Medal in Economics at the Orange County Academic Decathlon. Elected to Student Council after delivering a campaign speech to the entire school.</p>
-            
-            <a href="https://www.wchs.com/" class="external link">Learn More</a>
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3>Project Specialist: Student Design Team</h3>
+                <span class="timeline-meta">South Orange County Community College District • Mission Viejo, CA • April 2022 - June 2023</span>
+              </div>
+              <ul class="timeline-list">
+                <li>Collaborated with cross-functional teams on the redesign of Mysite, the district's student portal</li>
+                <li>Conducted user research and feedback sessions to identify pain points in student workflows</li>
+                <li>Contributed to the MAP Lite 3.0 update by assisting in wireframing and prototyping</li>
+              </ul>
+            </div>
           </article>
-          
         </div>
       </div>
     </section>
+
+    <section class="education-section">
+      <div class="container">
+        <h2 class="section-title">Education</h2>
+        <div class="edu-grid">
+          <article class="edu-card">
+            <div class="edu-logo">
+              <img src="pictures/UCI_logo.svg" alt="UCI Logo">
+            </div>
+            <div class="edu-content">
+              <h3>University of California, Irvine</h3>
+              <p class="edu-degree">B.S. Informatics • GPA: 3.7</p>
+              <p class="edu-year">2025</p>
+              <p class="edu-courses">
+                <strong>Relevant Coursework:</strong> Project Management, Information Retrieval, 
+                Software System Design, Data Structures, User Interaction Software
+              </p>
+            </div>
+          </article>
+
+          <article class="edu-card">
+            <div class="edu-logo">
+              <img src="pictures/WCHS.png" alt="WCHS logo">
+            </div>
+            <div class="edu-content">
+              <h3>Whittier Christian High School</h3>
+              <p class="edu-year">2020</p>
+              <p>Earned Bronze Medal in Economics at the Orange County Academic Decathlon. 
+              Elected to Student Council after delivering a campaign speech to the entire school.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="interests-preview">
+      <div class="container">
+        <h2 class="section-title">Life Beyond Code</h2>
+        <p class="section-intro">
+          While I love building software, my life is enriched by creative pursuits and exploration. 
+          Here's a glimpse into what keeps me inspired outside of work.
+        </p>
+        
+        <div class="interests-grid">
+          <article class="interest-card">
+            <div class="interest-icon">📸</div>
+            <h3>Photography</h3>
+            <p>Capturing moments and telling stories through my camera lens. From landscapes to street photography, I find beauty in the everyday.</p>
+            <a href="gallery.html" class="interest-link">View Gallery →</a>
+          </article>
+
+          <article class="interest-card">
+            <div class="interest-icon">✈️</div>
+            <h3>Travel</h3>
+            <p>Exploring new places and cultures around the world. Each journey brings new perspectives and unforgettable memories.</p>
+          </article>
+
+          <article class="interest-card">
+            <div class="interest-icon">🎸</div>
+            <h3>Music</h3>
+            <p>Playing guitar and expressing myself through music. Whether it's acoustic sessions or jamming with friends, music is my creative outlet.</p>
+          </article>
+        </div>
+        
+        <div class="cta-center">
+          <a href="about.html" class="btn btn-primary">Explore My Interests</a>
+        </div>
+      </div>
+    </section>
+
   </main>
+  
   <footer class="site-footer">
-    <div class="container">
-      <p>&copy; 2025 Mark Qiu. All rights reserved.</p>
-  <p>
-    <a href="http://validator.w3.org/check?uri=referer">
-       Verified by W3C validator
-    </a>
-  </p>
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h3>Mark Qiu</h3>
+        <p>Full Stack Developer passionate about building efficient, well-managed projects.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <ul class="footer-links">
+          <li><a href="https://github.com/mark24680617" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/tiancheng-q-4a1901237/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="mailto:mark24680617@gmail.com">Email</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <p class="footer-copyright">&copy; 2025 Mark Qiu. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 </body>
