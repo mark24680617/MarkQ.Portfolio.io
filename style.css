@@ -253,6 +253,10 @@ ul { list-style: none; }
   opacity: 1;
   transform: translateY(0);
 }
+.hero-buttons .btn.visible:hover {
+  transform: translateY(2px);
+  box-shadow: var(--shadow-hover);
+}
 .scroll-hint {
   position: absolute;
   bottom: 32px;
