@@ -470,8 +470,9 @@ ul { list-style: none; }
   border: 2px solid #333;
   transition: border-color 0.2s, transform 0.3s var(--spring);
 }
-.photo-cell:hover { border-color: var(--accent-orange); transform: scale(1.02); }
-.photo-cell img { width: 100%; height: 100%; object-fit: cover; }
+.photo-cell:hover { border-color: var(--accent-orange); }
+.photo-cell img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s var(--ease); }
+.photo-cell:hover img { transform: scale(1.03); }
 .photo-cell.featured { grid-column: span 2; grid-row: span 2; }
 .photo-cta { text-align: center; }
 .btn-outline-orange {
