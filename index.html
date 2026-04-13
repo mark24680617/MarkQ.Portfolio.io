@@ -43,7 +43,7 @@
   </nav>
 
   <section class="hero" id="hero">
-    <span class="hero-badge">Portfolio — 2025</span>
+    <span class="hero-badge">Portfolio — 2026</span>
     <h1 class="hero-title" aria-label="Mark Qiu">MARK QIU</h1>
     <div class="hero-divider">
       <span></span>
@@ -70,25 +70,31 @@
           <div>
             <p class="section-label">About</p>
             <p>
-              I'm <strong>Mark Qiu</strong>, a Computer Science graduate from <strong>UC Irvine</strong> and founder of <strong>LUQ LABS</strong>.
+              I'm <strong>Mark Qiu</strong>, a UC Irvine graduate and founder of <strong>LUQ LABS</strong>.
               I build focused tools that solve real problems — from AI-powered citizenship test prep to rental tracking apps.
-              My background spans backend engineering, data pipelines, and fullstack development.
-              Outside of code, I'm a photographer capturing landscapes across 10+ destinations and an acoustic guitar player.
+              I specialize in AI agents, contextual engineering, full-stack development, and product management, with a recent focus on architecture engineering.
+              Outside of code, I'm a photographer capturing landscapes across 20+ destinations and an acoustic guitar player.
             </p>
           </div>
           <div>
             <p class="skills-label">Skills</p>
             <div class="skills-grid">
-              <span class="tag reveal stagger-1">Go</span>
-              <span class="tag reveal stagger-2">Python</span>
-              <span class="tag reveal stagger-3">JavaScript</span>
+              <span class="tag reveal stagger-1">Python</span>
+              <span class="tag reveal stagger-2">C++</span>
+              <span class="tag reveal stagger-3">Go</span>
               <span class="tag reveal stagger-4">TypeScript</span>
-              <span class="tag reveal stagger-5">React</span>
-              <span class="tag reveal stagger-6">MySQL</span>
-              <span class="tag reveal stagger-7">Redis</span>
-              <span class="tag reveal stagger-8">Hive</span>
-              <span class="tag reveal stagger-9">HTML/CSS</span>
-              <span class="tag reveal stagger-10">Git</span>
+              <span class="tag reveal stagger-5">AI Agents</span>
+              <span class="tag reveal stagger-6">Prompt Engineering</span>
+              <span class="tag reveal stagger-7">iOS Development</span>
+              <span class="tag reveal stagger-8">Expo</span>
+              <span class="tag reveal stagger-9">StoreKit</span>
+              <span class="tag reveal stagger-10">S2S</span>
+              <span class="tag reveal stagger-11">Supabase</span>
+              <span class="tag reveal stagger-12">Firebase</span>
+              <span class="tag reveal stagger-13">Vercel</span>
+              <span class="tag reveal stagger-14">Authentication</span>
+              <span class="tag reveal stagger-15">Godot</span>
+              <span class="tag reveal stagger-16">Product Managing</span>
             </div>
           </div>
         </div>
@@ -145,6 +151,26 @@
           <div class="timeline-entry reveal">
             <div class="timeline-dot orange"></div>
             <div class="timeline-card">
+              <h3>Founder</h3>
+              <p class="meta">LUQ LABS · 2026–Present</p>
+              <ul>
+                <li>Built and launched <strong>CitizenReady AI</strong> — AI-powered citizenship test prep with mock interviews, SM-2 spaced repetition, and support for 9 languages</li>
+                <li>Developed <strong>Rental Note</strong>, a mobile app for landlords and tenants to track payments, leases, and maintenance</li>
+                <li>Handled end-to-end product lifecycle: architecture, development, App Store deployment, and in-app purchase integration via StoreKit and S2S</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">Mobile App</span>
+                <span class="tag">AI Agents</span>
+                <span class="tag">Expo</span>
+                <span class="tag">StoreKit</span>
+                <span class="tag">S2S</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-entry reveal stagger-2">
+            <div class="timeline-dot orange"></div>
+            <div class="timeline-card">
               <h3>Backend Developer Intern</h3>
               <p class="meta">Bilibili · Shanghai · June–Aug 2024</p>
               <ul>
@@ -163,7 +189,7 @@
             </div>
           </div>
 
-          <div class="timeline-entry reveal stagger-2">
+          <div class="timeline-entry reveal stagger-3">
             <div class="timeline-dot yellow"></div>
             <div class="timeline-card">
               <h3>Project Specialist: Student Design Team</h3>
@@ -177,7 +203,7 @@
           </div>
         </div>
 
-        <div class="projects-sub reveal stagger-3">
+        <div class="projects-sub reveal stagger-4">
           <h3>Notable Projects</h3>
           <div class="projects-grid">
             <div class="project-mini-card">
@@ -235,23 +261,33 @@
       <div class="container">
         <div class="photo-showcase-header">
           <h2>Photography</h2>
-          <span class="stat">40+ Photos · 10+ Destinations</span>
+          <span class="stat">10+ Destinations</span>
         </div>
-        <div class="photo-grid-showcase">
-          <div class="photo-cell featured">
-            <img src="pictures/Yosemite_1.jpeg" alt="Yosemite National Park landscape" loading="lazy">
+        <div class="globe-container" id="globe-container">
+          <canvas id="globe-canvas" style="width:100%;height:100%;cursor:grab;opacity:0;transition:opacity 1.2s ease;touch-action:none;"></canvas>
+          <div class="polaroid" data-rotate="-5">
+            <img src="pictures/Yosemite_1.jpeg" alt="Yosemite National Park">
+            <span>Yosemite</span>
           </div>
-          <div class="photo-cell">
-            <img src="pictures/Osaka_1.jpeg" alt="Osaka cityscape" loading="lazy">
+          <div class="polaroid" data-rotate="4">
+            <img src="pictures/Osaka_1.jpeg" alt="Osaka, Japan">
+            <span>Osaka</span>
           </div>
-          <div class="photo-cell">
-            <img src="pictures/Dali_1.jpeg" alt="Dali landscape" loading="lazy">
+          <div class="polaroid" data-rotate="-3">
+            <img src="pictures/Dali_1.jpeg" alt="Dali, China">
+            <span>Dali</span>
           </div>
-          <div class="photo-cell">
-            <img src="pictures/Joshua_2.jpeg" alt="Joshua Tree desert" loading="lazy">
+          <div class="polaroid" data-rotate="6">
+            <img src="pictures/Cancun_1.jpeg" alt="Cancun, Mexico">
+            <span>Cancún</span>
           </div>
-          <div class="photo-cell">
-            <img src="pictures/Cancun_1.jpeg" alt="Cancun beach" loading="lazy">
+          <div class="polaroid" data-rotate="-4">
+            <img src="pictures/Lijiang_1.jpeg" alt="Lijiang, China">
+            <span>Lijiang</span>
+          </div>
+          <div class="polaroid" data-rotate="3">
+            <img src="pictures/dunhuang_3.jpeg" alt="Dunhuang, China">
+            <span>Dunhuang</span>
           </div>
         </div>
         <div class="photo-cta">
@@ -276,5 +312,6 @@
   </footer>
 
   <script src="./script.js"></script>
+  <script type="module" src="./globe.js"></script>
 </body>
 </html>

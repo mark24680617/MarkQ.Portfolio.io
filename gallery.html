@@ -2,307 +2,126 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="author" content="Mark Qiu">
-  <meta name="description" content="Photography Gallery — Mark Qiu's travel photos from 10+ destinations">
+  <meta name="description" content="Photography Gallery — Mark Qiu">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400;1,500&family=Space+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
   <title>Gallery — Mark Qiu</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      color: #fff;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+    }
+    #gallery-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+      cursor: grab;
+    }
+    #gallery-canvas:active { cursor: grabbing; }
+    #genre-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      mix-blend-mode: exclusion;
+      z-index: 10;
+      padding: 0 1rem;
+    }
+    #genre-text {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(3rem, 8vw, 7rem);
+      color: #fff;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    #genre-text.fade-out {
+      opacity: 0;
+      transform: translateY(-12px);
+    }
+    #back-link {
+      position: fixed;
+      top: 20px;
+      left: 24px;
+      z-index: 20;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+      letter-spacing: -0.02em;
+    }
+    #back-link:hover, #back-link:focus { opacity: 1; }
+    #loading {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      transition: opacity 0.6s ease;
+    }
+    #loading.hidden { opacity: 0; pointer-events: none; }
+    .loading-inner { text-align: center; }
+    .loading-logo { font-weight: 900; font-size: 2rem; margin-bottom: 24px; letter-spacing: -0.03em; }
+    .loading-track { width: 180px; height: 2px; background: rgba(255,255,255,0.1); margin: 0 auto; overflow: hidden; }
+    .loading-bar { height: 100%; width: 0%; background: #fff; transition: width 0.2s ease; }
+    .loading-pct { margin-top: 14px; font-size: 0.7rem; letter-spacing: 0.15em; opacity: 0.4; }
+    #nav-hint {
+      position: fixed;
+      bottom: 24px;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      text-align: center;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      transition: opacity 1.5s ease;
+    }
+    #nav-hint.hidden { opacity: 0; pointer-events: none; }
+    @media (max-width: 480px) {
+      #back-link { top: 14px; left: 16px; font-size: 0.95rem; }
+      #nav-hint { bottom: 16px; font-size: 0.55rem; }
+    }
+  </style>
 </head>
 <body>
-
-  <a class="skip-link" href="#gallery-main">Skip to content</a>
-
-  <nav class="site-nav" aria-label="Primary">
-    <div class="container">
-      <a href="index.html" class="nav-logo">MQ.</a>
-      <div class="nav-links">
-        <a href="index.html#about">About</a>
-        <a href="index.html#luqlabs">LUQ LABS</a>
-        <a href="index.html#experience">Experience</a>
-        <a href="index.html#education">Education</a>
-        <a href="index.html#photos">Photos</a>
-        <a href="index.html#contact">Contact</a>
-      </div>
-      <button class="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <div class="nav-mobile">
-        <a href="index.html#about">About</a>
-        <a href="index.html#luqlabs">LUQ LABS</a>
-        <a href="index.html#experience">Experience</a>
-        <a href="index.html#education">Education</a>
-        <a href="index.html#photos">Photos</a>
-        <a href="index.html#contact">Contact</a>
-      </div>
+  <canvas id="gallery-canvas"></canvas>
+  <div id="genre-overlay"><h1 id="genre-text"></h1></div>
+  <a href="index.html" id="back-link" aria-label="Back to portfolio">&larr; MQ.</a>
+  <div id="nav-hint">Scroll &middot; Arrow Keys &middot; Touch</div>
+  <div id="loading">
+    <div class="loading-inner">
+      <div class="loading-logo">MQ.</div>
+      <div class="loading-track"><div class="loading-bar" id="loading-bar"></div></div>
+      <div class="loading-pct" id="loading-pct">0%</div>
     </div>
-  </nav>
-
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo lightbox">
-    <button class="lightbox-close" aria-label="Close">&times;</button>
-    <button class="lightbox-prev" id="lb-prev" aria-label="Previous">&#10094;</button>
-    <button class="lightbox-next" id="lb-next" aria-label="Next">&#10095;</button>
-    <img src="" alt="" id="lb-img">
-    <div class="lightbox-caption" id="lb-caption"></div>
   </div>
-
-  <main id="gallery-main">
-    <div class="gallery-header-section">
-      <h1 class="reveal">Photography</h1>
-      <p class="subtitle reveal">Capturing moments across 10+ destinations</p>
-    </div>
-
-    <div class="container">
-
-      <section class="gallery-group">
-        <h2 class="gallery-group-label reveal">Personal</h2>
-        <div class="gallery-masonry">
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/personal_1.jpeg" alt="Personal portrait 1" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/personal_2.jpeg" alt="Personal portrait 2" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/personal_3.jpeg" alt="Personal portrait 3" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/personal_4.jpeg" alt="Personal portrait 4" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/personal_5.jpeg" alt="Personal portrait 5" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/personal_6.jpeg" alt="Personal portrait 6" loading="lazy">
-          </div>
-        </div>
-      </section>
-
-      <section class="gallery-group">
-        <h2 class="gallery-group-label reveal">Japan</h2>
-        <div class="gallery-masonry">
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Osaka_1.jpeg" alt="Osaka, Japan street scene" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Osaka_2.jpeg" alt="Osaka, Japan cityscape" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Osaka_3.jpeg" alt="Osaka, Japan architecture" loading="lazy">
-          </div>
-        </div>
-      </section>
-
-      <section class="gallery-group">
-        <h2 class="gallery-group-label reveal">California</h2>
-        <div class="gallery-masonry">
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/California_1.jpeg" alt="California coastline" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/California_2.jpeg" alt="California landscape" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/California_3.jpeg" alt="California scenery" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Yosemite_1.jpeg" alt="Yosemite National Park granite cliffs" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Yosemite_2.jpeg" alt="Yosemite National Park wilderness" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/sequio.jpeg" alt="Sequoia giant trees" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Joshua_1.jpeg" alt="Joshua Tree desert landscape" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Joshua_2.jpeg" alt="Joshua Tree rock formations" loading="lazy">
-          </div>
-        </div>
-      </section>
-
-      <section class="gallery-group">
-        <h2 class="gallery-group-label reveal">Mexico</h2>
-        <div class="gallery-masonry">
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Cancun_1.jpeg" alt="Cancun turquoise waters" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Cancun_2.jpeg" alt="Cancun tropical beach" loading="lazy">
-          </div>
-        </div>
-      </section>
-
-      <section class="gallery-group">
-        <h2 class="gallery-group-label reveal">China</h2>
-        <div class="gallery-masonry">
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Dali_1.jpeg" alt="Dali ancient city and mountains" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Dali_2.jpeg" alt="Dali Erhai Lake scenery" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Dali_3.jpeg" alt="Dali landscape" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Lijiang_1.jpeg" alt="Lijiang ancient town" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Lijiang_2.jpeg" alt="Lijiang cobblestone streets" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Lijiang_3.jpeg" alt="Lijiang old town architecture" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Daochen_1.jpeg" alt="Daocheng highland landscape" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Daochen_2.jpeg" alt="Daocheng mountain scenery" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Daochen_3.jpeg" alt="Daocheng alpine meadow" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Daochen_4.jpeg" alt="Daocheng snow-capped peaks" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Daochen_5.jpeg" alt="Daocheng valley vista" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Daochen_6.jpeg" alt="Daocheng wilderness" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/dunhuang_1.jpeg" alt="Dunhuang sand dunes" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/dunhuang_2.jpeg" alt="Dunhuang desert landscape" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/dunhuang_3.jpeg" alt="Dunhuang Silk Road oasis" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/danxia_1.jpeg" alt="Zhangye Danxia rainbow mountains" loading="lazy">
-          </div>
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/danxia_2.jpeg" alt="Zhangye Danxia colorful rock formations" loading="lazy">
-          </div>
-        </div>
-      </section>
-
-      <section class="gallery-group">
-        <h2 class="gallery-group-label reveal">Special Moments</h2>
-        <div class="gallery-masonry">
-          <div class="gallery-item reveal">
-            <img class="lb-trigger" src="pictures/Comet.jpeg" alt="Comet in the night sky" loading="lazy">
-          </div>
-        </div>
-      </section>
-
-      <div class="gallery-stats reveal">
-        <div class="stat-card">
-          <div class="stat-number">20+</div>
-          <div class="stat-label">Destinations</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">40+</div>
-          <div class="stat-label">Photos</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">5</div>
-          <div class="stat-label">Countries</div>
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <p>&copy; 2026 Mark Qiu. All rights reserved.</p>
-  </footer>
-
-  <script src="./script.js"></script>
-  <script>
-  (function () {
-    var triggers = [];
-    var imgs = document.querySelectorAll('.lb-trigger');
-    for (var i = 0; i < imgs.length; i++) triggers.push(imgs[i]);
-
-    var currentIndex = 0;
-    var previousFocus = null;
-    var lightbox = document.getElementById('lightbox');
-    var lbImg = document.getElementById('lb-img');
-    var lbCaption = document.getElementById('lb-caption');
-    var closeBtn = document.querySelector('.lightbox-close');
-    var prevBtn = document.getElementById('lb-prev');
-    var nextBtn = document.getElementById('lb-next');
-    var focusable = [closeBtn, prevBtn, nextBtn];
-
-    function open(i) {
-      currentIndex = i;
-      previousFocus = document.activeElement;
-      lbImg.src = triggers[i].src;
-      lbImg.alt = triggers[i].alt;
-      lbCaption.textContent = triggers[i].alt;
-      lightbox.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      closeBtn.focus();
+  <noscript><p style="color:#fff;text-align:center;padding:40px;">JavaScript is required. <a href="index.html" style="color:#fff;">Return to portfolio</a></p></noscript>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://esm.sh/three@0.165.0"
     }
-
-    function close() {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = '';
-      if (previousFocus) previousFocus.focus();
-    }
-
-    function prev() {
-      currentIndex = (currentIndex - 1 + triggers.length) % triggers.length;
-      open(currentIndex);
-    }
-
-    function next() {
-      currentIndex = (currentIndex + 1) % triggers.length;
-      open(currentIndex);
-    }
-
-    for (var j = 0; j < triggers.length; j++) {
-      (function (idx) {
-        triggers[idx].style.cursor = 'pointer';
-        triggers[idx].addEventListener('click', function () { open(idx); });
-      })(j);
-    }
-
-    closeBtn.addEventListener('click', close);
-    prevBtn.addEventListener('click', prev);
-    nextBtn.addEventListener('click', next);
-
-    lightbox.addEventListener('click', function (e) {
-      if (e.target === lightbox) close();
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (!lightbox.classList.contains('active')) return;
-      if (e.key === 'Escape') close();
-      else if (e.key === 'ArrowLeft') prev();
-      else if (e.key === 'ArrowRight') next();
-      else if (e.key === 'Tab') {
-        var idx = focusable.indexOf(document.activeElement);
-        if (e.shiftKey) {
-          e.preventDefault();
-          focusable[(idx - 1 + focusable.length) % focusable.length].focus();
-        } else {
-          e.preventDefault();
-          focusable[(idx + 1) % focusable.length].focus();
-        }
-      }
-    });
-  })();
+  }
   </script>
+  <script type="module" src="./gallery.js"></script>
 </body>
 </html>
