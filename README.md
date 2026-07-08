@@ -1,6 +1,6 @@
 # Mark Qiu — Personal Portfolio
 
-A modern, Neo-Brutalist single-page portfolio for **Mark Qiu** — founder of [LUQ LABS](https://luqlabs.com), developer, and creator.
+A single-page portfolio for myself.
 
 ## Highlights
 
@@ -17,10 +17,3 @@ Plain **HTML / CSS / vanilla JavaScript** — no build step.
 - `gallery.html`, `gallery.js` — photo gallery with lightbox (Three.js)
 - `globe.js` — interactive 3D globe (cobe)
 - `style.css` — Neo-Brutalist design system
-
-## Run locally
-
-```bash
-python3 -m http.server 8000
-# then open http://localhost:8000
-```
