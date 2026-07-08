@@ -417,6 +417,21 @@ ul { list-style: none; }
 .project-mini-card h4 { font-family: var(--font-display); font-size: 16px; font-weight: 900; margin-bottom: 6px; }
 .project-mini-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 10px; }
 .project-mini-card .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 14px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent-orange);
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s var(--ease);
+}
+.card-link:hover { border-color: var(--accent-orange); }
 
 /* ── Education ── */
 .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
