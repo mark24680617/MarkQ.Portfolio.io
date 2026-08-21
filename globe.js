@@ -36,6 +36,8 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
   var globeCenterX = 0;
   var globeCenterY = 0;
   var globeRadius = 0;
+  var lastWidth = 0;
+  var resizeTimer = null;
 
   canvas.addEventListener('pointerdown', function (e) {
     pointerDown = { x: e.clientX, y: e.clientY };
@@ -101,14 +103,13 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
     }
   }
 
-  function init() {
-    var width = canvas.offsetWidth;
-    if (width === 0 || globe) return;
-
+  function measure(width) {
     globeCenterX = width / 2;
     globeCenterY = width / 2;
     globeRadius = 0.4 * width;
+  }
 
+  function build(width) {
     globe = createGlobe(canvas, {
       devicePixelRatio: 1,
       width: width,
@@ -136,15 +137,34 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
     canvas.style.opacity = '1';
   }
 
-  if (canvas.offsetWidth > 0) {
-    init();
-  } else {
-    var ro = new ResizeObserver(function (entries) {
-      if (entries[0] && entries[0].contentRect.width > 0) {
-        ro.disconnect();
-        init();
-      }
-    });
-    ro.observe(canvas);
+  // cobe bakes the sphere's radius in at construction time, so a globe built at
+  // one width keeps drawing at that scale after its canvas is resized: the sphere
+  // spills out of the box, and the polaroids — which project onto 0.4 x the
+  // *current* width — no longer sit on it. Rebuilding at the new width keeps the
+  // drawn sphere and the projection in agreement. Rotation lives in phi/phiOffset/
+  // thetaOffset out here, so it carries across the rebuild.
+  function sync() {
+    var width = canvas.offsetWidth;
+    if (width === 0 || width === lastWidth) return;
+    lastWidth = width;
+    measure(width);
+    if (globe) {
+      globe.destroy();
+      globe = null;
+    }
+    build(width);
   }
+
+  var ro = new ResizeObserver(function () {
+    if (!globe) {
+      // First paint, including the case where the canvas starts at zero width.
+      sync();
+      return;
+    }
+    // Rebuilds allocate a WebGL context, so coalesce the burst of callbacks a
+    // window drag produces instead of rebuilding on every frame of it.
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(sync, 150);
+  });
+  ro.observe(canvas);
 })();
