@@ -190,7 +190,7 @@ import * as THREE from 'three';
       planes.push({ z: (DEPTH / VISIBLE) * i, imageIndex: imgIdx });
       setTex(i, imgIdx);
     }
-    genreEl.textContent = photos[0].genre;
+    genreEl.textContent = window.I18N ? window.I18N.genre(photos[0].genre) : photos[0].genre;
     curGenre = photos[0].genre;
     if (hintEl) setTimeout(function () { hintEl.classList.add('hidden'); }, 6000);
     tick();
@@ -245,12 +245,17 @@ import * as THREE from 'three';
     inTransition = true;
     genreEl.classList.add('fade-out');
     setTimeout(function () {
-      genreEl.textContent = g;
+      genreEl.textContent = window.I18N ? window.I18N.genre(g) : g;
       curGenre = g;
       genreEl.classList.remove('fade-out');
       setTimeout(function () { inTransition = false; }, 400);
     }, 350);
   }
+
+  // curGenre stays the English key; only the visible label follows the language.
+  document.addEventListener('langchange', function () {
+    if (curGenre) genreEl.textContent = window.I18N.genre(curGenre);
+  });
 
   // --- Render loop ---
 

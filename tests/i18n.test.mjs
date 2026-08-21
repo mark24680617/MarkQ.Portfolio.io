@@ -76,10 +76,9 @@ const ALLOWED = new Set(['MQ.', '← MQ.', 'LUQ LABS', 'LUQ LABS ↗', 'GitHub �
   'GitHub', 'LinkedIn', 'Devpost ↗', 'cocktailsteps.com ↗', 'luqlabs.com ↗', '0%',
   'Ten Thousand Suns', 'CitizenReady AI', 'Rental Note', 'VeriStudio',
   'CocktailSteps', 'LicenseLink', 'WFC — WorkFlow_Customize',
-  // unmarkedText() strips &amp; to a space rather than decoding it, so the
-  // product-card h3 "Lu Xun &amp; Han Pictorial Art" surfaces this way, not
-  // with a literal "&". Both forms name the same intentionally-unmarked text.
-  'Lu Xun & Han Pictorial Art', 'Lu Xun   Han Pictorial Art',
+  // the product-card h3 "Lu Xun &amp; Han Pictorial Art" is intentionally
+  // unmarked; unmarkedText() decodes &amp; to a literal "&" before comparing.
+  'Lu Xun & Han Pictorial Art',
   // the doctype declaration precedes the first real tag match, so it is
   // never inside a stack frame and always counts as loose text.
   '<!doctype html>',
@@ -87,6 +86,19 @@ const ALLOWED = new Set(['MQ.', '← MQ.', 'LUQ LABS', 'LUQ LABS ↗', 'GitHub �
   'Firebase', 'Vercel', 'Godot', 'Three.js', 'WebGL', 'AI/ML', 'SM-2',
   'Docker', 'Bun', 'Tauri', 'FastAPI', 'Next.js', 'OpenAI', 'Backblaze B2',
   'MySQL', 'Redis', 'Hive', 'Kratos']);
+
+// The entities index.html and gallery.html actually use, decoded to their
+// real characters rather than blanked to a space, so ALLOWED can hold real
+// rendered strings instead of blanking artifacts. Numeric refs decode too;
+// any other named entity falls back to a space (safe default, unused today).
+const NAMED_ENTITIES = { amp: '&', copy: '©', rsquo: '’', larr: '←', middot: '·' };
+
+export function decodeEntities(s) {
+  return s.replace(/&([a-z]+);|&#(\d+);/gi, (m, name, num) => {
+    if (num) return String.fromCharCode(Number(num));
+    return NAMED_ENTITIES[name.toLowerCase()] || ' ';
+  });
+}
 
 /** Text nodes with no data-i18n ancestor. */
 function unmarkedText(file) {
@@ -115,11 +127,10 @@ function unmarkedText(file) {
     }
   }
   if (!stack.some((f) => f.i18n)) loose.push(src.slice(last));
-  return loose.map((t) => t.replace(/&[a-z]+;|&#\d+;/gi, ' ').trim()).filter(Boolean);
+  return loose.map((t) => decodeEntities(t).trim()).filter(Boolean);
 }
 
-// gallery.html joins this list in Task 5, when it gets marked up.
-const COVERED = ['index.html'];
+const COVERED = ['index.html', 'gallery.html'];
 
 test('no English text is left unmarked', () => {
   for (const file of COVERED) {
@@ -127,5 +138,59 @@ test('no English text is left unmarked', () => {
       .filter((t) => /[A-Za-z]{3,}/.test(t))
       .filter((t) => !ALLOWED.has(t));
     assert.deepEqual(missed, [], `${file} has untranslated text: ${JSON.stringify(missed)}`);
+  }
+});
+
+test('entity decoding handles the named entities in use, plus numeric refs', () => {
+  assert.equal(decodeEntities('&amp;'), '&');
+  assert.equal(decodeEntities('&copy;'), '©');
+  assert.equal(decodeEntities('&rsquo;'), '’');
+  assert.equal(decodeEntities('&larr;'), '←');
+  assert.equal(decodeEntities('&middot;'), '·');
+  assert.equal(decodeEntities('&#65;'), 'A');
+  assert.equal(decodeEntities('Lu Xun &amp; Han Pictorial Art'), 'Lu Xun & Han Pictorial Art');
+});
+
+/** data-i18n-attr may coexist with a text marker on the same element
+    (.hero-title does exactly that); only data-i18n/-html nesting is a bug. */
+function nestedI18nMarkers(file) {
+  const src = read(file)
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<!--[\s\S]*?-->/g, '');
+  const nested = [];
+  const stack = [];
+  const tagRe = /<(\/)?([a-zA-Z][\w-]*)((?:"[^"]*"|'[^']*'|[^>])*?)(\/)?>/g;
+  let m;
+  while ((m = tagRe.exec(src))) {
+    const closing = m[1];
+    const tag = m[2].toLowerCase();
+    const attrs = m[3] || '';
+    const selfClose = m[4];
+    if (closing) {
+      for (let i = stack.length - 1; i >= 0; i--) {
+        if (stack[i].tag === tag) { stack.length = i; break; }
+      }
+    } else if (!VOID.has(tag) && !selfClose) {
+      const marked = /data-i18n(?:-html)?=/.test(attrs);
+      if (marked && stack.some((f) => f.i18n)) nested.push(`<${tag}> at offset ${m.index}`);
+      stack.push({ tag, i18n: marked });
+    }
+  }
+  return nested;
+}
+
+test('no data-i18n/-html element contains a descendant carrying either', () => {
+  for (const file of COVERED) {
+    const nested = nestedI18nMarkers(file);
+    assert.deepEqual(nested, [], `${file} nests i18n markers, hiding the child from coverage: ${nested.join(', ')}`);
+  }
+});
+
+test('no dictionary key is dead', () => {
+  const { zh } = loadDictionary();
+  const used = new Set([...keysInHtml('index.html'), ...keysInHtml('gallery.html')]);
+  for (const key of Object.keys(zh)) {
+    assert.ok(used.has(key), `"${key}" is in i18n-zh.js but no HTML uses it`);
   }
 });

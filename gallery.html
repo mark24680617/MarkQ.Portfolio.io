@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="author" content="Mark Qiu">
-  <meta name="description" content="Photography Gallery — Mark Qiu">
+  <meta name="description" content="Photography Gallery — Mark Qiu" data-i18n-attr="content:gallery.meta.description">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400;1,500&family=Space+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <title>Gallery — Mark Qiu</title>
+  <title data-i18n="gallery.meta.title">Gallery — Mark Qiu</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
@@ -66,6 +66,28 @@
       letter-spacing: -0.02em;
     }
     #back-link:hover, #back-link:focus { opacity: 1; }
+    .lang-toggle {
+      position: fixed;
+      top: 14px;
+      right: 16px;
+      z-index: 10;
+      display: inline-flex;
+      border: 2px solid rgba(255,255,255,0.5);
+      background: rgba(0,0,0,0.4);
+      padding: 0;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .lang-toggle span {
+      display: block;
+      padding: 2px 7px;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.55);
+    }
+    .lang-toggle span.active { background: #fff; color: #000; }
     #loading {
       position: fixed;
       inset: 0;
@@ -105,8 +127,12 @@
 <body>
   <canvas id="gallery-canvas"></canvas>
   <div id="genre-overlay"><h1 id="genre-text"></h1></div>
-  <a href="index.html" id="back-link" aria-label="Back to portfolio">&larr; MQ.</a>
-  <div id="nav-hint">Scroll &middot; Arrow Keys &middot; Touch</div>
+  <a href="index.html" id="back-link" aria-label="Back to portfolio" data-i18n-attr="aria-label:gallery.backlink.aria">&larr; MQ.</a>
+  <button class="lang-toggle" type="button" aria-pressed="false" aria-label="Switch to Chinese / 切换到中文">
+    <span data-lang="en" class="active">EN</span>
+    <span data-lang="zh" class="">中文</span>
+  </button>
+  <div id="nav-hint" data-i18n="gallery.navhint">Scroll &middot; Arrow Keys &middot; Touch</div>
   <div id="loading">
     <div class="loading-inner">
       <div class="loading-logo">MQ.</div>
@@ -114,7 +140,7 @@
       <div class="loading-pct" id="loading-pct">0%</div>
     </div>
   </div>
-  <noscript><p style="color:#fff;text-align:center;padding:40px;">JavaScript is required. <a href="index.html" style="color:#fff;">Return to portfolio</a></p></noscript>
+  <noscript><p style="color:#fff;text-align:center;padding:40px;" data-i18n-html="gallery.noscript">JavaScript is required. <a href="index.html" style="color:#fff;">Return to portfolio</a></p></noscript>
   <script type="importmap">
   {
     "imports": {
@@ -122,6 +148,8 @@
     }
   }
   </script>
+  <script src="./i18n-zh.js"></script>
+  <script src="./i18n.js"></script>
   <script type="module" src="./gallery.js"></script>
 </body>
 </html>
