@@ -1,2 +1,8 @@
 .DS_Store
+
+# Local agent/planning artifacts — kept on disk, never in the repo.
+docs/superpowers/
 .superpowers/
+.serena/
+.remember/
+.claude/settings.local.json
