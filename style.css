@@ -417,6 +417,20 @@ ul { list-style: none; }
 .project-mini-card h4 { font-family: var(--font-display); font-size: 16px; font-weight: 900; margin-bottom: 6px; }
 .project-mini-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 10px; }
 .project-mini-card .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.award-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  margin-bottom: 8px;
+  border: 2px solid #000;
+  background: var(--accent-orange);
+  color: #000;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.card-links { display: flex; flex-wrap: wrap; gap: 18px; }
 .card-link {
   display: inline-flex;
   align-items: center;
@@ -593,6 +607,8 @@ ul { list-style: none; }
 .stagger-14 { transition-delay: 700ms; }
 .stagger-15 { transition-delay: 750ms; }
 .stagger-16 { transition-delay: 800ms; }
+.stagger-17 { transition-delay: 850ms; }
+.stagger-18 { transition-delay: 900ms; }
 
 /* ── Gallery Page ── */
 .gallery-header-section {

@@ -4,8 +4,8 @@ A single-page portfolio for myself.
 
 ## Highlights
 
-- **LUQ LABS products** — Ten Thousand Suns (3D exhibition), CitizenReady AI, and Rental Note
-- **Experience & projects** — work history plus notable projects (LicenseLink, WFC)
+- **LUQ LABS products** — Ten Thousand Suns (3D exhibition), Lu Xun & Han Pictorial Art (client exhibition), CitizenReady AI, and Rental Note
+- **Experience & projects** — work history plus notable projects (VeriStudio, CocktailSteps, LicenseLink, WFC)
 - **Education** — B.S. Informatics, UC Irvine
 - **Photography** — an interactive globe and a full gallery of landscapes across 10+ destinations
 
