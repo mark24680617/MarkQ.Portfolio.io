@@ -44,3 +44,26 @@ test('genre map covers exactly the genres gallery.js uses', () => {
   const { genre } = loadDictionary();
   assert.deepEqual(Object.keys(genre).sort(), genresInGalleryJs());
 });
+
+export function keysInHtml(file) {
+  const src = read(file);
+  const keys = [];
+  for (const m of src.matchAll(/data-i18n(?:-html)?="([^"]+)"/g)) keys.push(m[1]);
+  for (const m of src.matchAll(/data-i18n-attr="([^"]+)"/g)) {
+    for (const pair of m[1].split(',')) {
+      const [attr, key] = pair.split(':').map((s) => s.trim());
+      assert.ok(attr && key, `malformed data-i18n-attr pair "${pair}" in ${file}`);
+      keys.push(key);
+    }
+  }
+  return keys;
+}
+
+test('every key used in the HTML exists in the dictionary', () => {
+  const { zh } = loadDictionary();
+  for (const file of ['index.html', 'gallery.html']) {
+    for (const key of keysInHtml(file)) {
+      assert.ok(key in zh, `${file} uses "${key}", which is not in i18n-zh.js`);
+    }
+  }
+});

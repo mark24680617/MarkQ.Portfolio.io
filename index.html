@@ -4,40 +4,46 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Mark Qiu">
-  <meta name="description" content="Mark Qiu — Founder of LUQ LABS, Developer, Creator. Building focused tools that solve real problems.">
+  <meta name="description" content="Mark Qiu — Founder of LUQ LABS, Developer, Creator. Building focused tools that solve real problems." data-i18n-attr="content:head.description">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css">
-  <title>Mark Qiu — Founder · Developer · Creator</title>
+  <title data-i18n="head.title">Mark Qiu — Founder · Developer · Creator</title>
 </head>
 <body>
 
-  <a class="skip-link" href="#about">Skip to content</a>
+  <a class="skip-link" href="#about" data-i18n="nav.skip">Skip to content</a>
 
-  <nav class="site-nav" aria-label="Primary">
+  <nav class="site-nav" aria-label="Primary" data-i18n-attr="aria-label:nav.aria">
     <div class="container">
       <a href="#" class="nav-logo">MQ.</a>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#luqlabs">LUQ LABS</a>
-        <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
-        <a href="#photos">Photos</a>
-        <a href="#contact">Contact</a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="#about" data-i18n="nav.about">About</a>
+          <a href="#luqlabs">LUQ LABS</a>
+          <a href="#experience" data-i18n="nav.experience">Experience</a>
+          <a href="#education" data-i18n="nav.education">Education</a>
+          <a href="#photos" data-i18n="nav.photos">Photos</a>
+          <a href="#contact" data-i18n="nav.contact">Contact</a>
+        </div>
+        <button class="lang-toggle" type="button" aria-pressed="false" aria-label="Switch to Chinese / 切换到中文">
+          <span data-lang="en" class="active">EN</span>
+          <span data-lang="zh">中文</span>
+        </button>
+        <button class="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false" data-i18n-attr="aria-label:nav.hamburger.aria">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
-      <button class="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
       <div class="nav-mobile">
-        <a href="#about">About</a>
+        <a href="#about" data-i18n="nav.about">About</a>
         <a href="#luqlabs">LUQ LABS</a>
-        <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
-        <a href="#photos">Photos</a>
-        <a href="#contact">Contact</a>
+        <a href="#experience" data-i18n="nav.experience">Experience</a>
+        <a href="#education" data-i18n="nav.education">Education</a>
+        <a href="#photos" data-i18n="nav.photos">Photos</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
       </div>
     </div>
   </nav>
@@ -372,6 +378,8 @@
     <p>&copy; 2026 Mark Qiu. All rights reserved.</p>
   </footer>
 
+  <script src="./i18n-zh.js"></script>
+  <script src="./i18n.js"></script>
   <script src="./script.js"></script>
   <script type="module" src="./globe.js"></script>
 </body>
