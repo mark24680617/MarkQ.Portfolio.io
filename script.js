@@ -120,5 +120,9 @@
     initReveal();
     initScrollSpy();
     initHamburger();
+
+    // i18n.js replaces .hero-title's text wholesale, which throws away the
+    // per-letter spans. Rebuild them so the stagger plays in the new language.
+    document.addEventListener('langchange', initHeroLetters);
   });
 })();
