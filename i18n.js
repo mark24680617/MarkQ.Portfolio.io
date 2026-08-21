@@ -13,12 +13,18 @@
 
   var original = new WeakMap();
 
+  /* Plain property lookup on HTML_LANG lets ?lang=toString or ?lang=__proto__
+     resolve through the prototype chain. Own-property check closes that. */
+  function isValidLang(lang) {
+    return Object.prototype.hasOwnProperty.call(HTML_LANG, lang);
+  }
+
   function resolve() {
     var q = new URLSearchParams(location.search).get('lang');
-    if (q && HTML_LANG[q]) return q;
+    if (q && isValidLang(q)) return q;
     try {
       var stored = localStorage.getItem(STORAGE_KEY);
-      if (stored && HTML_LANG[stored]) return stored;
+      if (stored && isValidLang(stored)) return stored;
     } catch (e) {
       /* Safari private mode throws on localStorage. English is the right fallback. */
     }
@@ -88,24 +94,33 @@
     });
   }
 
+  /* aria-label is a constant identifying the control ("中文 / Chinese"), set
+     once in the markup — paintToggle only ever moves aria-pressed and the
+     active segment, never the label. A label that changes to name the
+     opposite action contradicts aria-pressed's own state and fails WCAG
+     2.5.3 Label in Name against the visible "EN 中文" text. */
   function paintToggle(lang) {
     var btn = document.querySelector('.lang-toggle');
     if (!btn) return;
     btn.setAttribute('aria-pressed', String(lang === 'zh'));
-    btn.setAttribute('aria-label', lang === 'zh' ? '切换到英文 / Switch to English' : 'Switch to Chinese / 切换到中文');
     btn.querySelectorAll('[data-lang]').forEach(function (seg) {
       seg.classList.toggle('active', seg.getAttribute('data-lang') === lang);
     });
   }
 
   function set(lang) {
-    if (!HTML_LANG[lang] || lang === current) return;
+    if (!isValidLang(lang) || lang === current) return;
     current = lang;
     try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* see resolve() */ }
     var url = new URL(location.href);
     if (lang === 'zh') url.searchParams.set('lang', 'zh');
     else url.searchParams.delete('lang');
-    history.replaceState(null, '', url.pathname + url.search + url.hash);
+    try {
+      history.replaceState(null, '', url.pathname + url.search + url.hash);
+    } catch (e) {
+      /* Opaque origins (file://) throw here. A failed URL update must not
+         abort the actual language switch below. */
+    }
     apply(lang);
   }
 
