@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { createContext, runInContext } from 'node:vm';
 
@@ -63,7 +63,10 @@ test('every key used in the HTML exists in the dictionary', () => {
   const { zh } = loadDictionary();
   for (const file of ['index.html', 'gallery.html']) {
     for (const key of keysInHtml(file)) {
-      assert.ok(key in zh, `${file} uses "${key}", which is not in i18n-zh.js`);
+      // Own-property check, not `key in zh` — `in` walks the prototype chain,
+      // so data-i18n="toString" would pass by resolving to Object.prototype.
+      assert.ok(Object.prototype.hasOwnProperty.call(zh, key),
+        `${file} uses "${key}", which is not in i18n-zh.js`);
     }
   }
 });
@@ -130,7 +133,10 @@ function unmarkedText(file) {
   return loose.map((t) => decodeEntities(t).trim()).filter(Boolean);
 }
 
-const COVERED = ['index.html', 'gallery.html'];
+// Every top-level HTML page is covered by default, rather than needing to be
+// opted in — a page added later without updating this list would otherwise
+// sit silently outside the gate.
+const COVERED = readdirSync(ROOT).filter((f) => f.endsWith('.html'));
 
 test('no English text is left unmarked', () => {
   for (const file of COVERED) {
@@ -138,6 +144,14 @@ test('no English text is left unmarked', () => {
       .filter((t) => /[A-Za-z]{3,}/.test(t))
       .filter((t) => !ALLOWED.has(t));
     assert.deepEqual(missed, [], `${file} has untranslated text: ${JSON.stringify(missed)}`);
+  }
+});
+
+test('no ALLOWED entry is stale', () => {
+  const present = new Set(COVERED.flatMap((file) => unmarkedText(file)));
+  for (const entry of ALLOWED) {
+    assert.ok(present.has(entry),
+      `"${entry}" is in ALLOWED but matches no loose text in ${COVERED.join(', ')}`);
   }
 });
 
@@ -172,9 +186,18 @@ function nestedI18nMarkers(file) {
         if (stack[i].tag === tag) { stack.length = i; break; }
       }
     } else if (!VOID.has(tag) && !selfClose) {
-      const marked = /data-i18n(?:-html)?=/.test(attrs);
-      if (marked && stack.some((f) => f.i18n)) nested.push(`<${tag}> at offset ${m.index}`);
-      stack.push({ tag, i18n: marked });
+      const html = /data-i18n-html=/.test(attrs);
+      const text = !html && /data-i18n=/.test(attrs);
+      const marked = html || text;
+      // data-i18n writes el.textContent, so ANY child tag — marked or not —
+      // flattens away silently. data-i18n-html exists precisely so markup can
+      // survive, so only a marked descendant is a violation there.
+      if (stack.some((f) => f.text)) {
+        nested.push(`<${tag}> at offset ${m.index} (child of a data-i18n text element)`);
+      } else if (marked && stack.some((f) => f.i18n)) {
+        nested.push(`<${tag}> at offset ${m.index}`);
+      }
+      stack.push({ tag, i18n: marked, text: text });
     }
   }
   return nested;
@@ -184,6 +207,63 @@ test('no data-i18n/-html element contains a descendant carrying either', () => {
   for (const file of COVERED) {
     const nested = nestedI18nMarkers(file);
     assert.deepEqual(nested, [], `${file} nests i18n markers, hiding the child from coverage: ${nested.join(', ')}`);
+  }
+});
+
+const TRANSLATABLE_ATTRS = ['alt', 'title', 'placeholder', 'aria-label'];
+
+// Attribute values that stay English by policy — the attribute equivalent of
+// ALLOWED above.
+const ATTR_ALLOWED = new Set([
+  '中文 / Chinese', // the toggle's constant aria-label, never translated
+  'Mark Qiu', // meta[name="author"] — the byline is not translated
+]);
+
+function metaName(attrs) {
+  const m = attrs.match(/\bname="([^"]*)"/);
+  return m && m[1];
+}
+
+/** Translatable attribute values with no data-i18n-attr marker naming them. */
+function unmarkedAttrs(file) {
+  const src = read(file)
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<!--[\s\S]*?-->/g, '');
+  const missed = [];
+  const tagRe = /<(\/)?([a-zA-Z][\w-]*)((?:"[^"]*"|'[^']*'|[^>])*?)(\/)?>/g;
+  let m;
+  while ((m = tagRe.exec(src))) {
+    if (m[1]) continue; // closing tags carry no attributes
+    const tag = m[2].toLowerCase();
+    const attrs = m[3] || '';
+    const marker = attrs.match(/data-i18n-attr="([^"]*)"/);
+    const markedAttrs = new Set(
+      marker ? marker[1].split(',').map((pair) => pair.split(':')[0].trim()) : [],
+    );
+    // content only carries translatable text on meta[name="description"]
+    // (and meta[name="author"], which ATTR_ALLOWED exempts below) — not on
+    // e.g. meta[name="viewport"], whose content is a technical value.
+    const checked = ['description', 'author'].includes(metaName(attrs))
+      ? [...TRANSLATABLE_ATTRS, 'content']
+      : TRANSLATABLE_ATTRS;
+    for (const attr of checked) {
+      const am = attrs.match(new RegExp(`\\b${attr}="([^"]*)"`));
+      if (!am) continue;
+      const value = decodeEntities(am[1]);
+      if (!/[A-Za-z]{3,}/.test(value)) continue;
+      if (ATTR_ALLOWED.has(value)) continue;
+      if (markedAttrs.has(attr)) continue;
+      missed.push(`${file}: <${tag} ${attr}="${value}">`);
+    }
+  }
+  return missed;
+}
+
+test('no translatable attribute is left unmarked', () => {
+  for (const file of COVERED) {
+    const missed = unmarkedAttrs(file);
+    assert.deepEqual(missed, [], `untranslated attributes: ${JSON.stringify(missed)}`);
   }
 });
 

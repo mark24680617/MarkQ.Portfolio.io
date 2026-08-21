@@ -19,6 +19,13 @@
     return Object.prototype.hasOwnProperty.call(HTML_LANG, lang);
   }
 
+  /* Same hazard as HTML_LANG above, reached through a dictionary key instead
+     of a lang code: ZH['toString'] or GENRE['constructor'] would otherwise
+     resolve through Object.prototype rather than falling back to English. */
+  function lookup(dict, key) {
+    return Object.prototype.hasOwnProperty.call(dict, key) ? dict[key] : undefined;
+  }
+
   function resolve() {
     var q = new URLSearchParams(location.search).get('lang');
     if (q && isValidLang(q)) return q;
@@ -51,14 +58,14 @@
 
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
       var en = english(el, 'text');
-      el.textContent = zh ? (ZH[el.getAttribute('data-i18n')] || en) : en;
+      el.textContent = zh ? (lookup(ZH, el.getAttribute('data-i18n')) || en) : en;
     });
 
     /* Only these keys are ever treated as markup, and only because the English
        they replace already contains inline tags. */
     document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
       var en = english(el, 'html');
-      el.innerHTML = zh ? (ZH[el.getAttribute('data-i18n-html')] || en) : en;
+      el.innerHTML = zh ? (lookup(ZH, el.getAttribute('data-i18n-html')) || en) : en;
     });
 
     document.querySelectorAll('[data-i18n-attr]').forEach(function (el) {
@@ -68,7 +75,7 @@
         var key = bits[1] && bits[1].trim();
         if (!attr || !key) return;
         var en = english(el, 'attr', attr);
-        el.setAttribute(attr, zh ? (ZH[key] || en) : en);
+        el.setAttribute(attr, zh ? (lookup(ZH, key) || en) : en);
       });
     });
 
@@ -133,8 +140,8 @@
   window.I18N = {
     get lang() { return current; },
     set: set,
-    t: function (key, en) { return current === 'zh' ? (ZH[key] || en) : en; },
-    genre: function (g) { return current === 'zh' ? (GENRE[g] || g) : g; },
+    t: function (key, en) { return current === 'zh' ? (lookup(ZH, key) || en) : en; },
+    genre: function (g) { return current === 'zh' ? (lookup(GENRE, g) || g) : g; },
   };
 
   apply(current);
