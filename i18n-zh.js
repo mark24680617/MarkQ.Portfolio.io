@@ -99,7 +99,7 @@ window.MQ_I18N_ZH = {
 
   /* photos */
   "photos.heading": "摄影",
-  "photos.stat": "10+ 个目的地",
+  "photos.stat": "20+ 个目的地",
   "photos.yosemite.alt": "优山美地国家公园",
   "photos.yosemite.caption": "优山美地",
   "photos.osaka.alt": "日本大阪",
