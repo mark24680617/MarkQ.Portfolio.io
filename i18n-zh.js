@@ -136,12 +136,16 @@ window.MQ_I18N_ZH = {
 
 /* Keyed by the exact English string gallery.js stores on each photo. */
 window.MQ_I18N_GENRE = {
+  "Arizona": "亚利桑那",
   "California": "加利福尼亚",
   "Cosmos": "星空",
   "Danxia": "丹霞",
   "Japan": "日本",
   "México": "墨西哥",
+  "Oregon": "俄勒冈",
+  "Pets": "萌宠",
   "Portraits": "人像",
+  "Shanghai": "上海",
   "Sichuan": "四川",
   "Silk Road": "丝绸之路",
   "Yunnan": "云南",
