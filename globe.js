@@ -9,20 +9,59 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
 
   var DEG2RAD = Math.PI / 180;
 
+  // The first eight line up, in order, with the .polaroid cards in index.html.
+  // The rest are the other places in the gallery, drawn as plain dots.
   var markerData = [
-    { location: [37.75, -119.59], size: 0.02 },
-    { location: [34.69, 135.50], size: 0.02 },
-    { location: [25.59, 100.23], size: 0.02 },
-    { location: [21.16, -86.85], size: 0.02 },
-    { location: [26.87, 100.23], size: 0.02 },
-    { location: [40.14, 94.66], size: 0.02 },
+    { location: [37.75, -119.59], size: 0.03 }, // Yosemite
+    { location: [34.69, 135.50], size: 0.03 },  // Osaka
+    { location: [25.59, 100.23], size: 0.03 },  // Dali
+    { location: [21.16, -86.85], size: 0.03 },  // Cancún
+    { location: [26.87, 100.23], size: 0.03 },  // Lijiang
+    { location: [40.14, 94.66], size: 0.03 },   // Dunhuang
+    { location: [45.58, -122.12], size: 0.03 }, // Columbia River Gorge
+    { location: [33.93, -116.19], size: 0.03 }, // Joshua Tree
+    { location: [36.55, -118.77], size: 0.03 }, // Sequoia
+    { location: [33.68, -117.83], size: 0.03 }, // Irvine
+    { location: [33.99, -117.76], size: 0.03 }, // Chino Hills
+    { location: [36.86, -111.37], size: 0.03 }, // Antelope Canyon
+    { location: [36.88, -111.51], size: 0.03 }, // Horseshoe Bend
+    { location: [45.52, -122.68], size: 0.03 }, // Portland
+    { location: [45.89, -123.96], size: 0.03 }, // Cannon Beach
+    { location: [23.25, -106.41], size: 0.03 }, // Mazatlán
+    { location: [33.59, 130.42], size: 0.03 },  // Fukuoka
+    { location: [33.35, 130.79], size: 0.03 },  // Ukiha
+    { location: [33.27, 131.36], size: 0.03 },  // Yufuin
+    { location: [31.23, 121.47], size: 0.03 },  // Shanghai
+    { location: [28.43, 100.35], size: 0.03 },  // Daocheng Yading
+    { location: [38.93, 100.12], size: 0.03 },  // Zhangye Danxia
   ];
 
   var polaroids = container.querySelectorAll('.polaroid');
   var rotations = [];
+  var shifts = [];
+  var below = [];
+  var pins = [];
+  var stems = [];
   for (var i = 0; i < polaroids.length; i++) {
     rotations.push(Number(polaroids[i].getAttribute('data-rotate')) || 0);
+    // data-shift moves a card sideways, in card widths, and data-below hangs it
+    // under its pin, so neighbouring cards clear each other and the dots.
+    shifts.push(Number(polaroids[i].getAttribute('data-shift')) || 0);
+    below.push(polaroids[i].hasAttribute('data-below'));
+    // The pin marks the exact spot; the stem carries the card clear of it.
+    var stem = document.createElement('span');
+    stem.className = 'globe-stem';
+    stem.setAttribute('aria-hidden', 'true');
+    var pin = document.createElement('span');
+    pin.className = 'globe-pin';
+    pin.setAttribute('aria-hidden', 'true');
+    container.appendChild(stem);
+    container.appendChild(pin);
+    stems.push(stem);
+    pins.push(pin);
   }
+  var cardWidth = 0;
+  var stemLength = 0;
 
   var pointerDown = null;
   var dragOffset = { phi: 0, theta: 0 };
@@ -90,14 +129,22 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
   }
 
   function updatePolaroids(currentPhi, currentTheta) {
-    for (var i = 0; i < markerData.length; i++) {
+    for (var i = 0; i < polaroids.length; i++) {
       var m = markerData[i];
       var proj = projectMarker(m.location[0], m.location[1], currentPhi, currentTheta);
       var el = polaroids[i];
-      if (!el) continue;
+      var x = proj.screenX;
+      var y = proj.screenY;
+      var dx = shifts[i] * cardWidth;
+      var dy = below[i] ? stemLength : -stemLength;
 
       var vis = Math.max(0, Math.min(1, proj.visible * 3));
-      el.style.transform = 'translate(' + proj.screenX + 'px, ' + proj.screenY + 'px) translate(-50%, -100%) rotate(' + rotations[i] + 'deg)';
+      pins[i].style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+      stems[i].style.height = Math.hypot(dx, dy) + 'px';
+      stems[i].style.transform = 'translate(' + x + 'px, ' + y + 'px) rotate(' + Math.atan2(-dx, dy) + 'rad)';
+      el.style.transform = 'translate(' + (x + dx) + 'px, ' + (y + dy) + 'px) translate(-50%, ' + (below[i] ? '0' : '-100%') + ') rotate(' + rotations[i] + 'deg)';
+      pins[i].style.opacity = vis;
+      stems[i].style.opacity = vis;
       el.style.opacity = vis;
       el.style.filter = vis < 1 ? 'blur(' + ((1 - vis) * 8) + 'px)' : 'none';
     }
@@ -107,6 +154,12 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
     globeCenterX = width / 2;
     globeCenterY = width / 2;
     globeRadius = 0.4 * width;
+    // Cards shrink at each breakpoint along with the globe, so the offsets and
+    // stem are measured from a card rather than fixed in pixels.
+    if (polaroids.length) {
+      cardWidth = polaroids[0].offsetWidth;
+      stemLength = Math.round(polaroids[0].offsetHeight * 0.14);
+    }
   }
 
   function build(width) {
@@ -121,7 +174,7 @@ import createGlobe from 'https://esm.sh/cobe@0.6.3';
       mapSamples: 16000,
       mapBrightness: 9,
       baseColor: [1, 1, 1],
-      markerColor: [0.4, 0.6, 0.9],
+      markerColor: [1, 0.42, 0.21],
       glowColor: [0, 0, 0],
       markers: markerData,
       onRender: function (state) {

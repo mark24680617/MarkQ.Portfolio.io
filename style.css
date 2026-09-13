@@ -530,8 +530,9 @@ ul { list-style: none; }
   position: absolute;
   left: 0;
   top: 0;
+  z-index: 2;
   background: #fff;
-  padding: 8px 8px 28px;
+  padding: 6px 6px 20px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.35), 0 1px 3px rgba(0,0,0,0.2);
   pointer-events: none;
   opacity: 0;
@@ -540,13 +541,13 @@ ul { list-style: none; }
 }
 .polaroid img {
   display: block;
-  width: 140px;
-  height: 140px;
+  width: 96px;
+  height: 96px;
   object-fit: cover;
 }
 .polaroid span {
   position: absolute;
-  bottom: 6px;
+  bottom: 4px;
   left: 0;
   right: 0;
   text-align: center;
@@ -554,6 +555,33 @@ ul { list-style: none; }
   font-size: 0.65rem;
   color: #333;
   letter-spacing: 0.02em;
+}
+/* The pin sits on the photo's exact spot and stays above every card, so a
+   dot is never hidden; the stem runs from it to the card it carries. */
+.globe-pin,
+.globe-stem {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.globe-pin {
+  z-index: 3;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px #000;
+}
+.globe-stem {
+  z-index: 1;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--accent-orange);
+  transform-origin: 50% 0;
 }
 .photo-cta { text-align: center; }
 .btn-outline-orange {
@@ -742,16 +770,19 @@ ul { list-style: none; }
   .edu-grid { grid-template-columns: 1fr; }
   .hero-buttons { flex-direction: column; align-items: center; }
   .globe-container { width: 480px; }
-  .polaroid img { width: 95px; height: 95px; }
-  .polaroid { padding: 6px 6px 24px; }
+  .polaroid img { width: 68px; height: 68px; }
+  .polaroid { padding: 5px 5px 17px; }
+  .polaroid span { bottom: 3px; font-size: 0.55rem; }
   .gallery-masonry { column-count: 2; }
   .photo-showcase-header { flex-direction: column; gap: 8px; text-align: center; }
 }
 
 @media (max-width: 480px) {
   .globe-container { width: 320px; }
-  .polaroid img { width: 70px; height: 70px; }
-  .polaroid { padding: 5px 5px 20px; }
+  .polaroid img { width: 48px; height: 48px; }
+  .polaroid { padding: 4px 4px 13px; }
+  .polaroid span { bottom: 2px; font-size: 0.45rem; }
+  .globe-pin { width: 6px; height: 6px; margin: -3px 0 0 -3px; box-shadow: 0 0 0 1.5px #fff, 0 0 0 2.5px #000; }
   .gallery-masonry { column-count: 1; }
   .edu-card { flex-direction: column; }
   .contact-buttons { flex-direction: column; align-items: center; }

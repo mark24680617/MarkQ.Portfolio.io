@@ -117,6 +117,10 @@ window.MQ_I18N_ZH = {
   "photos.lijiang.caption": "丽江",
   "photos.dunhuang.alt": "中国敦煌",
   "photos.dunhuang.caption": "敦煌",
+  "photos.multnomah.alt": "俄勒冈州马尔特诺马瀑布",
+  "photos.multnomah.caption": "马尔特诺马瀑布",
+  "photos.joshua.alt": "加州约书亚树国家公园",
+  "photos.joshua.caption": "约书亚树",
   "photos.cta": "浏览完整相册 →",
 
   /* contact */
