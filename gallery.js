@@ -180,14 +180,21 @@ import * as THREE from 'three';
   }
 
   function init() {
+    // Number photos in the order planes reach the camera, not in plane order.
+    // Planes short of HALF arrive nearest-first; the rest arrive after one wrap,
+    // which itself adds VISIBLE. Counting down from the nearest plane covers
+    // both, so photos[] plays in order and a location passes as one run.
+    var ahead = 0;
+    for (var k = 0; k < VISIBLE; k++) if ((DEPTH / VISIBLE) * k < HALF) ahead++;
     for (var i = 0; i < VISIBLE; i++) {
       var mat = makeMat();
       mats.push(mat);
       var mesh = new THREE.Mesh(geo, mat);
       scene.add(mesh);
       meshes.push(mesh);
-      var imgIdx = i % total;
-      planes.push({ z: (DEPTH / VISIBLE) * i, imageIndex: imgIdx });
+      var z = (DEPTH / VISIBLE) * i;
+      var imgIdx = (((ahead - 1 - i) % total) + total) % total;
+      planes.push({ z: z, imageIndex: imgIdx });
       setTex(i, imgIdx);
     }
     genreEl.textContent = window.I18N ? window.I18N.genre(photos[0].genre) : photos[0].genre;

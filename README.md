@@ -26,3 +26,7 @@ Run the translation gate with `node --test tests/i18n.test.mjs` before committin
 any copy change. It fails on a missing key, a key nothing uses, English left
 unmarked in text or in a translatable attribute, a stale allow-list entry, and
 markup nested where the engine would destroy it.
+
+Run `node --test tests/gallery.test.mjs` after adding photos. It fails when a
+listed file is missing, when one location's photos are split apart in
+`gallery.js`, or when the gallery stops playing them in that order.
