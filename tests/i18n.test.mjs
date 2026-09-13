@@ -78,7 +78,8 @@ const VOID = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img',
 const ALLOWED = new Set(['MQ.', '← MQ.', 'LUQ LABS', 'LUQ LABS ↗', 'GitHub ↗',
   'GitHub', 'LinkedIn', 'Devpost ↗', 'cocktailsteps.com ↗', 'luqlabs.com ↗', '0%',
   'Ten Thousand Suns', 'CitizenReady AI', 'Rental Note', 'VeriStudio',
-  'CocktailSteps', 'LicenseLink', 'WFC — WorkFlow_Customize',
+  'CocktailSteps', 'Find a Job', 'LineCanary', 'LicenseLink',
+  'WFC — WorkFlow_Customize',
   // the product-card h3 "Lu Xun &amp; Han Pictorial Art" is intentionally
   // unmarked; unmarkedText() decodes &amp; to a literal "&" before comparing.
   'Lu Xun & Han Pictorial Art',
@@ -88,7 +89,8 @@ const ALLOWED = new Set(['MQ.', '← MQ.', 'LUQ LABS', 'LUQ LABS ↗', 'GitHub �
   'Python', 'C++', 'Go', 'TypeScript', 'Expo', 'StoreKit', 'S2S', 'Supabase',
   'Firebase', 'Vercel', 'Godot', 'Three.js', 'WebGL', 'AI/ML', 'SM-2',
   'Docker', 'Bun', 'Tauri', 'FastAPI', 'Next.js', 'OpenAI', 'Backblaze B2',
-  'MySQL', 'Redis', 'Hive', 'Kratos']);
+  'MySQL', 'Redis', 'Hive', 'Kratos', 'Gemini', 'Cloud Run', 'Node.js',
+  'CALL-E']);
 
 // The entities index.html and gallery.html actually use, decoded to their
 // real characters rather than blanked to a space, so ALLOWED can hold real
